@@ -1,0 +1,23 @@
+Source: brcm-patchram-plus-starfive
+Maintainer: Alexandre Ghiti <alexandre.ghiti@canonical.com>
+Section: utils
+Priority: optional
+Standards-Version: 4.5.1
+Build-Depends: debhelper-compat (= 13)
+Homepage: https://github.com/AsteroidOS/brcm-patchram-plus
+Vcs-Browser: https://github.com/AsteroidOS/brcm-patchram-plus
+Vcs-Git: https://github.com/AsteroidOS/brcm-patchram-plus.git
+Rules-Requires-Root: no
+
+Package: brcm-patchram-plus-starfive
+Architecture: riscv64
+Depends: ${shlibs:Depends},
+	${misc:Depends},
+	gpiod,
+	bluez,
+	linux-firmware-starfive
+Description: Tool to upload the bluetooth firmware to StarFive boards
+ This tool allows to upload the patchram file in HCD format to the Broadcomm
+ bluetooth chipset of the StarFive boards, currently supports the following
+ boards:
+  - VisionFive

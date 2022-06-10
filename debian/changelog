@@ -1,0 +1,5 @@
+brcm-patchram-plus-starfive (1.0-0~22.04.1~ppa1) jammy; urgency=medium
+
+  * Initial release (LP: #XXXXXX).
+
+ -- Alexandre Ghiti <alexandre.ghiti@canonical.com>  Thu, 09 Jun 2022 16:26:08 +0200

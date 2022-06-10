@@ -1,0 +1,19 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: brcm-patchram-plus
+Source: https://github.com/AsteroidOS/brcm-patchram-plus
+
+Files: *
+Copyright: Copyright (C) 2009-2011 Broadcom Corporation
+License: Apache-2.0
+
+Files: INSTALL
+Copyright: Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
+ 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+License: Apache-2.0
+
+License: Apache-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
