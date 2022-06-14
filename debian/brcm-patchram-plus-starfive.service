@@ -1,0 +1,10 @@
+[Unit]
+Description=Upload firmware file to Bluetooth chipset on the StarFive boards
+
+[Service]
+Type=forking
+ExecStart=/bin/bash /usr/bin/brcm-patchram-plus-starfive-service.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
