@@ -1,0 +1,60 @@
+From 754c54d03af6a334f31f8a124356742a30d333bb Mon Sep 17 00:00:00 2001
+From: Alexandre Ghiti <alexandre.ghiti@canonical.com>
+Date: Tue, 14 Jun 2022 10:27:49 +0200
+Subject: [PATCH] Add script to launch brcm_patchram_plus
+
+In addition, it monitors that the Bluetooth is up and fails otherwise,
+which allows systemd to relaunch the service until it finally works.
+
+Signed-off-by: Alexandre Ghiti <alexandre.ghiti@canonical.com>
+---
+ brcm-patchram-plus-starfive-service.sh | 37 ++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 brcm-patchram-plus-starfive-service.sh
+
+diff --git a/brcm-patchram-plus-starfive-service.sh b/brcm-patchram-plus-starfive-service.sh
+new file mode 100644
+index 0000000..a2f629d
+--- /dev/null
++++ b/brcm-patchram-plus-starfive-service.sh
+@@ -0,0 +1,37 @@
++#!/bin/bash
++
++enable_bluetooth()
++{
++	# We only support the VisionFive board for now
++	if ! grep -q '^StarFive VisionFive V1$' /proc/device-tree/model; then
++		exit 0
++	fi
++
++	gpioset 0 35=0
++	sleep 1
++	gpioset 0 35=1
++
++	# Load the modules
++	modprobe hci_uart
++
++	# Send the firmware
++	brcm_patchram_plus --enable_hci --no2bytes --tosleep 200000 --baudrate 115200 --patchram /lib/firmware/brcm/BCM43430A1.hcd /dev/ttyS1 &
++}
++
++enable_bluetooth
++
++# Wait for the controller to appear
++for ((j = 0 ; j < 30 ; j++)); do
++	hciconfig dev
++	if [[ "$?" == "0" ]]; then
++		break
++	fi
++	sleep 1
++done
++
++hciconfig dev | grep "UP"
++if [[ "$?" == "0" ]]; then
++	exit 0
++fi
++
++exit 1
+-- 
+2.34.1
+
